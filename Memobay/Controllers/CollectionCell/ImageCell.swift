@@ -24,13 +24,13 @@ class ImageCell: UICollectionViewCell {
                    options: [.transitionFlipFromRight, .showHideTransitionViews],
                    completion: nil)    }
     
-    func setImageWithURLSession(photoModel: Photo, completion: @escaping (UIImage?) -> Void) {
+    func setImageWithURLSession(photoModel: PhotoSource, completion: @escaping (UIImage?) -> Void) {
         if let image = photoModel.image {
             imageView.image = image
             return
         }
         
-        guard let imageURL = URL(string: photoModel.url) else { return }
+        guard let imageURL = URL(string: photoModel.medium) else { return }
         
         URLSession.shared.dataTask(with: imageURL) { data, _, _ in
             if let data = data, let image = UIImage (data: data) {

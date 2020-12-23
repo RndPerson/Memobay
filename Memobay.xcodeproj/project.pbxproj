@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		AC7E25992592B35B008E5228 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7E25982592B35B008E5228 /* MainViewController.swift */; };
 		AC7E259D2592B3C7008E5228 /* SetupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7E259C2592B3C7008E5228 /* SetupViewController.swift */; };
+		AC7E25A2259315C9008E5228 /* Photos.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC7E25A1259315C9008E5228 /* Photos.swift */; };
 		ACD8BC7F259137B500A7661D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD8BC7E259137B500A7661D /* AppDelegate.swift */; };
 		ACD8BC81259137B500A7661D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD8BC80259137B500A7661D /* SceneDelegate.swift */; };
 		ACD8BC83259137B500A7661D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACD8BC82259137B500A7661D /* ViewController.swift */; };
@@ -23,6 +24,7 @@
 /* Begin PBXFileReference section */
 		AC7E25982592B35B008E5228 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		AC7E259C2592B3C7008E5228 /* SetupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetupViewController.swift; sourceTree = "<group>"; };
+		AC7E25A1259315C9008E5228 /* Photos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photos.swift; sourceTree = "<group>"; };
 		ACD8BC7B259137B500A7661D /* Memobay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Memobay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACD8BC7E259137B500A7661D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ACD8BC80259137B500A7661D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -85,6 +87,7 @@
 				ACD8BC89259137B600A7661D /* LaunchScreen.storyboard */,
 				ACD8BC8C259137B600A7661D /* Info.plist */,
 				ACD8BC9B259150F200A7661D /* ImageViewController.swift */,
+				AC7E25A1259315C9008E5228 /* Photos.swift */,
 			);
 			path = Memobay;
 			sourceTree = "<group>";
@@ -173,6 +176,7 @@
 				ACD8BC9925913EA400A7661D /* ImageCell.swift in Sources */,
 				ACD8BC9C259150F200A7661D /* ImageViewController.swift in Sources */,
 				AC7E25992592B35B008E5228 /* MainViewController.swift in Sources */,
+				AC7E25A2259315C9008E5228 /* Photos.swift in Sources */,
 				ACD8BC7F259137B500A7661D /* AppDelegate.swift in Sources */,
 				ACD8BC81259137B500A7661D /* SceneDelegate.swift in Sources */,
 				AC7E259D2592B3C7008E5228 /* SetupViewController.swift in Sources */,

@@ -11,7 +11,7 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     
-    var photos = [Photo]()
+    var photos = [PhotoSource]()
     
     
     override func viewDidLoad() {
@@ -19,26 +19,26 @@ class ViewController: UIViewController {
         collectionView.register(UINib(nibName: "ImageCell", bundle: nil), forCellWithReuseIdentifier: "ImageCell")
         collectionView.dataSource = self
         collectionView.delegate = self
-        setupPhotos()
+//        setupPhotos()
         DispatchQueue.main.async {
         self.collectionView.reloadData()}    }
     
-    private func setupPhotos() {
-        guard let imageURL = URL(string: "https://pixabay.com/api/?key=19616972-a7ed02b324f20e470f79bf362&q=red+cars&image_type=photo") else { return }
-        
-        URLSession.shared.dataTask(with: imageURL) { data, _, _ in
-            guard
-                let imageData = data,
-                let folder = try? JSONDecoder().decode(Folder.self, from: imageData)
-            else { return }
-            
-            self.photos = folder.photos.prefix(12).map {Photo(url: $0.url) }
-                
-                DispatchQueue.main.async {
-                    self.collectionView.reloadData()
-            }
-        }.resume()
-    }
+//    private func setupPhotos() {
+//        guard let imageURL = URL(string: "https://pixabay.com/api/?key=19616972-a7ed02b324f20e470f79bf362&q=&image_type=photo") else { return }
+//
+//        URLSession.shared.dataTask(with: imageURL) { data, _, _ in
+//            guard
+//                let imageData = data,
+//                let folder = try? JSONDecoder().decode(Folder.self, from: imageData)
+//            else { return }
+//
+//            self.photos = folder.photos.prefix(6).map {Photo(url: $0.url) }
+//
+//                DispatchQueue.main.async {
+//                    self.collectionView.reloadData()
+//            }
+//        }.resume()
+//    }
 }
 
 extension ViewController: UICollectionViewDataSource {
@@ -64,7 +64,7 @@ extension ViewController: UICollectionViewDataSource {
 
 extension ViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let widthScreen = view.frame.width - 40
+        let widthScreen = view.frame.width - 70
         let width = widthScreen/3
         return CGSize(width: width, height: width)
     }
@@ -74,24 +74,24 @@ extension ViewController: UICollectionViewDelegateFlowLayout {
 
 
 
-struct Photo : Codable {
-    let url: String
-    
-    var image: UIImage?
-    
-    init(url: String){
-        self.url = url
-    }
-    
-    private enum CodingKeys: String, CodingKey {
-        case url = "webformatURL"
-    }
-}
-
-struct Folder : Codable {
-    let photos: [Photo]
-
-    private enum CodingKeys: String, CodingKey {
-        case photos = "hits"
-    }
-}
+//struct Photo : Codable {
+//    let url: String
+//
+//    var image: UIImage?
+//
+//    init(url: String){
+//        self.url = url
+//    }
+//
+//    private enum CodingKeys: String, CodingKey {
+//        case url = "webformatURL"
+//    }
+//}
+//
+//struct Folder : Codable {
+//    let photos: [Photo]
+//
+//    private enum CodingKeys: String, CodingKey {
+//        case photos = "hits"
+//    }
+//}
