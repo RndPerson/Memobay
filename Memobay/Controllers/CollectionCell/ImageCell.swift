@@ -8,6 +8,7 @@
 import UIKit
 
 class ImageCell: UICollectionViewCell {
+    var url: String = ""
     
     @IBOutlet weak var imageView: UIImageView!
     
@@ -37,6 +38,13 @@ class ImageCell: UICollectionViewCell {
                           duration: 0.5,
                    options: [.transitionFlipFromRight, .showHideTransitionViews],
                    completion: nil)    }
+
+    func flipViewBack() {
+        UIView.transition(from: imageView, to: cardBack,
+                          duration: 0.5,
+                   options: [.transitionFlipFromRight, .showHideTransitionViews],
+                   completion: nil)
+    }
     
     func setImageWithURLSession(photoModel: PhotoSource, completion: @escaping (UIImage?) -> Void) {
         if let image = photoModel.image {
@@ -45,6 +53,8 @@ class ImageCell: UICollectionViewCell {
         }
         
         guard let imageURL = URL(string: photoModel.medium) else { return }
+
+        self.url = photoModel.medium
         
         URLSession.shared.dataTask(with: imageURL) { data, _, _ in
             if let data = data, let image = UIImage (data: data) {

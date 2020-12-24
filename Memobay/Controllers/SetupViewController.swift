@@ -11,24 +11,22 @@ class SetupViewController : UIViewController, UITextFieldDelegate {
     var MAX_PHOTO_COUNT = 6
     var photos = [PhotoSource]()
     
-    /*
-    enum Themes: CaseIterable {
-        case watch
-        case car
-        case phone
-        case airplane
-        case guitar
-        case human
-        case computer
-        case game
-        case fantasy
+    enum Themes: String, CaseIterable {
+        case watch = "watch"
+        case car = "car"
+        case phone = "phone"
+        case airplane = "airplane"
+        case guitar = "guitar"
+        case human = "human"
+        case computer = "computer"
+        case game = "game"
+        case fantasy = "fantasy"
         
-        static func random() -> Themes {
+        static func random() -> String {
             let theme = allCases.randomElement()!
-            return theme
-            }
+            return theme.rawValue
+        }
     }
-    */
     
     @IBOutlet weak var inputTheme: UITextField!
     
@@ -55,12 +53,11 @@ class SetupViewController : UIViewController, UITextFieldDelegate {
         return true
     }
     
-    /*
+    
     @IBAction func startRandomTheme(_ sender: Any) {
         let theme: String? = Themes.random()
         loadImagesAndStart(theme)
     }
-    */
     
     func loadImagesAndStart(_ theme: String?) {
         if (theme == nil || theme == "") {
