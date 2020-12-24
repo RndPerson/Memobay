@@ -10,78 +10,127 @@ import UIKit
 class  MainViewController: UIViewController {
     
     
-    @IBOutlet weak var rightView: UIView!
-    @IBOutlet weak var leftView: UIView!
-    @IBOutlet weak var leftBackCard: UIView!
-    @IBOutlet weak var rightBackCard: UIView!
-    @IBOutlet weak var emodjiLabel: UILabel!
-    @IBOutlet weak var errorLabel: UILabel!
-    @IBOutlet weak var leftItem: UILabel!
-    @IBOutlet weak var rightItem: UILabel!
+    @IBOutlet weak var goodTutorialView: UIView!
+    @IBOutlet weak var likeGT: UILabel!
+    @IBOutlet weak var goodAdvice: UILabel!
+    @IBOutlet weak var goodMotive: UILabel!
+    @IBOutlet weak var leftCardGT: UIView!
+    @IBOutlet weak var rightCardGT: UIView!
+    @IBOutlet weak var leftBackCardGT: UIView!
+    @IBOutlet weak var rightBackCardGT: UIView!
     
-    var isLeftFlipped = false
-    var isRightFlipped = false
+    
+    @IBOutlet weak var badTutorialView: UIView!
+    @IBOutlet weak var dislikeBT: UILabel!
+    @IBOutlet weak var badAdvice: UILabel!
+    @IBOutlet weak var badMotive: UILabel!
+    @IBOutlet weak var leftCardBT: UIView!
+    @IBOutlet weak var rightCardBT: UIView!
+    @IBOutlet weak var leftBackCardBT: UIView!
+    @IBOutlet weak var rightBackCardBT: UIView!
+    
+    var isLeftGTFlipped = false
+    var isRightGTFlipped = false
+    var isLeftBTFlipped = false
+    var isRightBTFlipped = false
 
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
 
     override func viewDidLoad() {
-        emodjiLabel.alpha = 0
-        errorLabel.alpha = 0
+        dislikeBT.alpha = 0
+        badMotive.alpha = 0
+        likeGT.alpha = 0
+        goodMotive.alpha = 0
     }
 
-    func checkCardsFlipped() {
-        if (isLeftFlipped && isRightFlipped) {
-            emodjiLabel.alpha = 1
-            errorLabel.alpha = 1
-
-//            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-//                UIView.transition(from: self.rightView, to: self.rightBackCard,
-//                                  duration: 0.5,
-//                            options: [.transitionFlipFromLeft, .showHideTransitionViews],
-//                            completion: nil )
-//                UIView.transition(from: self.leftView, to: self.leftBackCard,
-//                                  duration: 0.5,
-//                            options: [.transitionFlipFromLeft, .showHideTransitionViews],
-//                            completion: nil)
-//            }
+    
+    func checkGoodCardsFlipped() {
+        if (isLeftGTFlipped && isRightGTFlipped) {
+            goodAdvice.alpha = 0
+            UIView.animate (withDuration: 2) {            self.likeGT.alpha = 1
+                self.goodMotive.alpha = 1
+            }
+            UIView.animate (withDuration: 1.3) {
+                self.leftCardGT.alpha = 0
+                self.rightCardGT.alpha = 0
+            }
         }
     }
     
-    @IBAction func tapRightCard(_ sender: Any) {
-        UIView.transition(from: rightBackCard,
-                          to: rightView,
+    func checkBadCardsFlipped() {
+        if (isLeftBTFlipped && isRightBTFlipped) {
+            badAdvice.alpha = 0
+            UIView.animate (withDuration: 2) {            self.dislikeBT.alpha = 1
+                self.badMotive.alpha = 1
+            }
+            UIView.animate (withDuration: 1.3) {
+                self.leftCardGT.alpha = 0
+                self.rightCardGT.alpha = 0
+            }
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.3) {
+                UIView.transition(from: self.badTutorialView,
+                                  to: self.goodTutorialView,
+                                  duration: 0.5,
+                            options: [.transitionCrossDissolve, .showHideTransitionViews],
+                            completion:
+                                { _ in
+                                    self.leftCardGT.alpha = 1
+                                    self.rightCardGT.alpha = 1
+                                }
+                            )
+            }
+        }
+    }
+    
+    
+    
+    
+    @IBAction func tapLeftCardBT(_ sender: Any) {
+        UIView.transition(from: leftBackCardBT,
+                          to: leftCardBT,
                           duration: 0.5,
                     options: [.transitionFlipFromRight, .showHideTransitionViews],
                     completion: { _ in
-                        self.isRightFlipped.toggle()
-                        self.checkCardsFlipped()
-                    } )
-    }
+                        self.isLeftBTFlipped.toggle()
+                        self.checkBadCardsFlipped()
+                    } )    }
     
     
-    @IBAction func tapLeftCard(_ sender: Any) {
-        UIView.transition(from: leftBackCard,
-                          to: leftView,
+    @IBAction func tapRightCardBT(_ sender: Any) {
+        UIView.transition(from: rightBackCardBT,
+                          to: rightCardBT,
                           duration: 0.5,
                     options: [.transitionFlipFromRight, .showHideTransitionViews],
                     completion: { _ in
-                        self.isLeftFlipped.toggle()
-                        self.checkCardsFlipped()
-                    } )
-        
-    }
+                        self.isRightBTFlipped.toggle()
+                        self.checkBadCardsFlipped()
+                    } )    }
     
-  /*
-    @IBAction func goToSettingsView(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        if let popUpView =
-            storyboard.instantiateViewController(identifier: "SetupViewController") as? SetupViewController {
-//        show(popUpView, sender: nil)
-            navigationController?.pushViewController(popUpView, animated: true)
-      }
-    }
-    */
+    
+    @IBAction func tapLeftCardGT(_ sender: Any) {
+        UIView.transition(from: leftBackCardGT,
+                          to: leftCardGT,
+                          duration: 0.5,
+                    options: [.transitionFlipFromRight, .showHideTransitionViews],
+                    completion: { _ in
+                        self.isLeftGTFlipped.toggle()
+                        self.checkGoodCardsFlipped()
+                    } )    }
+    
+    
+    @IBAction func tapRightCardGT(_ sender: Any) {
+        UIView.transition(from: rightBackCardGT,
+                          to: rightCardGT,
+                          duration: 0.5,
+                    options: [.transitionFlipFromRight, .showHideTransitionViews],
+                    completion: { _ in
+                        self.isRightGTFlipped.toggle()
+                        self.checkGoodCardsFlipped()
+                    } )    }
+    
+    
 }
 

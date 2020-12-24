@@ -11,6 +11,25 @@ class SetupViewController : UIViewController, UITextFieldDelegate {
     var MAX_PHOTO_COUNT = 6
     var photos = [PhotoSource]()
     
+    /*
+    enum Themes: CaseIterable {
+        case watch
+        case car
+        case phone
+        case airplane
+        case guitar
+        case human
+        case computer
+        case game
+        case fantasy
+        
+        static func random() -> Themes {
+            let theme = allCases.randomElement()!
+            return theme
+            }
+    }
+    */
+    
     @IBOutlet weak var inputTheme: UITextField!
     
     @IBOutlet weak var emptyError: UILabel!
@@ -32,19 +51,23 @@ class SetupViewController : UIViewController, UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         let theme: String? = inputTheme.text
         loadImagesAndStart(theme)
-
-        
         
         return true
     }
     
+    /*
+    @IBAction func startRandomTheme(_ sender: Any) {
+        let theme: String? = Themes.random()
+        loadImagesAndStart(theme)
+    }
+    */
+    
     func loadImagesAndStart(_ theme: String?) {
         if (theme == nil || theme == "") {
-            self.emptyError.alpha = 1
+            UIView.animate (withDuration: 1) {            self.emptyError.alpha = 1 }
             return
         }
 
-//        guard let imageURL = URL(string: "https://pixabay.com/api/?key=19616972-a7ed02b324f20e470f79bf362&q=\(theme ?? "car")&page=1&per_page=6&image_type=photo") else { return }
         guard let imageURL = URL(string: "https://api.pexels.com/v1/search?query=\(theme ?? "car")&per_page=30") else { return }
 
         var request = URLRequest(url: imageURL)
@@ -69,8 +92,8 @@ class SetupViewController : UIViewController, UITextFieldDelegate {
             }
 
             if (uniquePhotos.count < self.MAX_PHOTO_COUNT) {
-                self.emptyError.alpha = 1
-                return
+                DispatchQueue.main.async { self.emptyError.alpha = 1 }
+                        return
             }
             
             self.photos = uniquePhotos.map {PhotoSource(url: $0.src.medium) }
@@ -79,7 +102,6 @@ class SetupViewController : UIViewController, UITextFieldDelegate {
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 if let gameView =
                 storyboard.instantiateViewController(identifier: "ViewController") as? ViewController {
-    //        show(gameView, sender: nil)
                     gameView.photos = self.photos + self.photos
                     gameView.photos.shuffle()
 

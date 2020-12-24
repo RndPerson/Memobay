@@ -17,6 +17,20 @@ class ImageCell: UICollectionViewCell {
         imageView.image = nil
     }
     
+    func demoCard () {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1)
+        {
+            UIView.transition(from: self.cardBack, to: self.imageView,
+                          duration: 1,
+                   options: [.transitionFlipFromRight, .showHideTransitionViews],
+                   completion: nil)    }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5)
+        {
+            UIView.transition(from: self.imageView, to: self.cardBack,
+                          duration: 1,
+                   options: [.transitionFlipFromRight, .showHideTransitionViews],
+                   completion: nil)    }    }
     
     func flipView () {
         UIView.transition(from: cardBack, to: imageView,
